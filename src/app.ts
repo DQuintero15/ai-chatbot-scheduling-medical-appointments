@@ -8,14 +8,13 @@ import { OPENAI_API_KEY } from "./config";
 import { PatientsService } from "./services/patients";
 import axiosInstance from "./utils/axios";
 import { MedicalService } from "./services/medical-services";
-import { sendMessage } from "./utils/sendMessage";
-import { recieveMessage } from "./utils/recieveMessage";
-import { DATA_THERMS_QUEUE } from "./queues";
+import { MessageBrokerService } from "./services/message-broker";
 
 const PORT = process.env.PORT ?? 3001;
 const ai = new AIClass(OPENAI_API_KEY, "gpt-4o-mini");
 const patientService = new PatientsService(axiosInstance);
 const medicalService = new MedicalService(axiosInstance);
+const messageBrokerService = new MessageBrokerService();
 
 const main = async () => {
   const { httpServer } = await createBot(
@@ -24,14 +23,8 @@ const main = async () => {
       provider,
       flow,
     },
-    { extensions: { ai, patientService, medicalService } }
+    { extensions: { ai, patientService, medicalService, messageBrokerService } }
   );
-
-  sendMessage(
-    DATA_THERMS_QUEUE,
-    JSON.stringify({ id: 2, dataThermsAccepted: true })
-  );
-  recieveMessage(DATA_THERMS_QUEUE);
 
   httpInject(provider.server);
   httpServer(+PORT);
