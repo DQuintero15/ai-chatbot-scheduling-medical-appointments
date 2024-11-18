@@ -8,7 +8,6 @@ import { promptInjectionFlow } from "src/flows/prompt-injection.flow";
 import { endFlow } from "src/flows/end.flow";
 import { generalMedicineAppointment } from "src/flows/general-medicine-appointment.flow";
 import { appointmentsSummaryFlow } from "src/flows/appointments-summary.flow";
-// import { flowSchedule } from "../flows/schedule.flow"
 
 const PROMPT_DISCRIMINATOR = `### Conversation History (Salesperson/Customer) ###
 {HISTORY}
