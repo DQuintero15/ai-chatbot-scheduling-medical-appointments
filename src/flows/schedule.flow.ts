@@ -8,13 +8,20 @@ import { Patient } from "src/typings/patients";
 import { GREETINGS_PROMPT } from "src/prompts/schedule.prompt";
 import { MedicalService } from "src/services/medical-services";
 import { Service } from "src/typings/medical-services";
+import { MessageBrokerService } from "src/services/message-broker";
+import { DATA_THERMS_QUEUE } from "src/queues";
 
 const scheduleFlow = addKeyword(EVENTS.ACTION).addAnswer(
   `Por favor, ingrese su número de identificación sin puntos ni comas.`,
   { capture: true },
-  async (ctx, { state, extensions, flowDynamic, endFlow }) => {
+  async (
+    ctx,
+    { state, extensions, flowDynamic, endFlow, fallBack, gotoFlow }
+  ) => {
     const patientService = extensions.patientService as PatientsService;
     const medicalService = extensions.medicalService as MedicalService;
+    const messageBrokerService =
+      extensions.messageBrokerService as MessageBrokerService;
     const ai = extensions.ai as AIClass;
 
     const { body } = ctx;
@@ -45,6 +52,8 @@ const scheduleFlow = addKeyword(EVENTS.ACTION).addAnswer(
         return endFlow();
       }
 
+      await messageBrokerService.sendMessage(DATA_THERMS_QUEUE, body);
+
       await typing(ctx, provider);
 
       const services = await medicalService.getServices();
@@ -68,17 +77,17 @@ const scheduleFlow = addKeyword(EVENTS.ACTION).addAnswer(
           { body: chunk.trim(), delay: generateTimer(150, 250) },
         ]);
       }
+
+      return endFlow();
     } catch (error) {
       console.error(error);
       await typing(ctx, provider);
+
       await flowDynamic(
-        [
-          `Lo siento, ocurrió un error al buscar el paciente con el número de identificación ${cleanBody}. 😔`,
-          `Por favor, intente nuevamente.`,
-        ],
+        `Lo siento, ocurrió un error al intentar buscar el paciente. 😔`,
         { delay: generateTimer(150, 250) }
       );
-      return endFlow();
+      return gotoFlow(scheduleFlow);
     }
   }
 );

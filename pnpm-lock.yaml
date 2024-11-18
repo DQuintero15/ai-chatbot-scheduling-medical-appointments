@@ -43,6 +43,9 @@ devDependencies:
   '@rollup/plugin-terser':
     specifier: ^0.4.4
     version: 0.4.4(rollup@4.24.0)
+  '@types/amqplib':
+    specifier: ^0.10.5
+    version: 0.10.5
   '@types/node':
     specifier: ^20.12.8
     version: 20.17.1
@@ -1567,6 +1570,12 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: false
 
+  /@types/amqplib@0.10.5:
+    resolution: {integrity: sha512-/cSykxROY7BWwDoi4Y4/jLAuZTshZxd8Ey1QYa/VaXriMotBDoou7V/twJiOSHzU6t1Kp1AHAUXGCgqq+6DNeg==}
+    dependencies:
+      '@types/node': 20.17.1
+    dev: true
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -1914,7 +1923,7 @@ packages:
       cache-manager: 5.7.6
       futoin-hkdf: 1.5.3
       libphonenumber-js: 1.11.12
-      libsignal: github.com/WhiskeySockets/libsignal-node/83a3e3a3864511cb74df1b796373f0d49d071134
+      libsignal: github.com/WhiskeySockets/libsignal-node/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e
       lodash: 4.17.21
       music-metadata: 7.14.0
       node-cache: 5.1.2
@@ -5181,8 +5190,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  github.com/WhiskeySockets/libsignal-node/83a3e3a3864511cb74df1b796373f0d49d071134:
-    resolution: {tarball: https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/83a3e3a3864511cb74df1b796373f0d49d071134}
+  github.com/WhiskeySockets/libsignal-node/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e:
+    resolution: {tarball: https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e}
     name: '@whiskeysockets/libsignal-node'
     version: 2.0.1
     dependencies:
