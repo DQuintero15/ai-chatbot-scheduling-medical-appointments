@@ -9,6 +9,7 @@ import { endFlow } from "src/flows/end.flow";
 import { generalMedicineAppointment } from "src/flows/general-medicine-appointment.flow";
 import { appointmentsSummaryFlow } from "src/flows/appointments-summary.flow";
 import { dentistryFirstVisitFlow } from "src/flows/dentistry-first-time-appointment.flow";
+import { clinicalLabAppointmentFlow } from "src/flows/clinical-lab-appointment.flow";
 
 const PROMPT_DISCRIMINATOR = `### Conversation History (Salesperson/Customer) ###
 {HISTORY}
@@ -56,4 +57,5 @@ export default async (
   if (prediction.includes(INTENTIONS.END_CHAT)) return gotoFlow(endFlow);
   if (prediction.includes(INTENTIONS.CHECK_SCHEDULED_APPOINTMENTS)) return gotoFlow(appointmentsSummaryFlow);
   if(prediction.includes(INTENTIONS.DENTISTRY_FIRST_TIME_APPOINTMENT)) return gotoFlow(dentistryFirstVisitFlow);
+  if(prediction.includes(INTENTIONS.CLINICAL_LAB_APPOINTMENT)) return gotoFlow(clinicalLabAppointmentFlow);
 };
