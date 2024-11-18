@@ -77,6 +77,8 @@ const scheduleFlow = addKeyword(EVENTS.ACTION).addAnswer(
           { body: chunk.trim(), delay: generateTimer(150, 250) },
         ]);
       }
+
+      return endFlow();
     } catch (error) {
       console.error(error);
       await typing(ctx, provider);
