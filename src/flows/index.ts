@@ -9,6 +9,7 @@ import { promptInjectionFlow } from "./prompt-injection.flow";
 import { endFlow } from "./end.flow";
 import { generalMedicineAppointment } from "./general-medicine-appointment.flow";
 import { appointmentsSummaryFlow } from "./appointments-summary.flow";
+import { dentistryFirstVisitFlow } from "./dentistry-first-time-appointment.flow";
 
 export default createFlow([
   welcomeFlow,
@@ -19,5 +20,6 @@ export default createFlow([
   endFlow,
   generalMedicineAppointment,
   appointmentsSummaryFlow,
+  dentistryFirstVisitFlow,
   idleFlow,
 ]);

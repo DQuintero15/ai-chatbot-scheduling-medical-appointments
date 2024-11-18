@@ -8,6 +8,7 @@ import { promptInjectionFlow } from "src/flows/prompt-injection.flow";
 import { endFlow } from "src/flows/end.flow";
 import { generalMedicineAppointment } from "src/flows/general-medicine-appointment.flow";
 import { appointmentsSummaryFlow } from "src/flows/appointments-summary.flow";
+import { dentistryFirstVisitFlow } from "src/flows/dentistry-first-time-appointment.flow";
 
 const PROMPT_DISCRIMINATOR = `### Conversation History (Salesperson/Customer) ###
 {HISTORY}
@@ -20,6 +21,8 @@ const PROMPT_DISCRIMINATOR = `### Conversation History (Salesperson/Customer) ##
 **${INTENTIONS.END_CHAT}**: Select this action if the customer seems to want to end the conversation.
 **${INTENTIONS.GENERAL_MEDICINE_APPOINTMENT}**: Select this action if the customer seems to want to schedule a general medicine appointment.
 **${INTENTIONS.CHECK_SCHEDULED_APPOINTMENTS}**: Select this action if the customer seems to want to check their scheduled appointments.
+**${INTENTIONS.DENTISTRY_FIRST_TIME_APPOINTMENT}** Select this action if the customer seems to want to schedule a dentistry first-time appointment.
+**${INTENTIONS.CLINICAL_LAB_APPOINTMENT}** Select this action if the customer seems to want to schedule a clinical lab appointment.
 
 ### Instructions ###.
 
@@ -52,4 +55,5 @@ export default async (
   if(prediction.includes(INTENTIONS.GENERAL_MEDICINE_APPOINTMENT)) return gotoFlow(generalMedicineAppointment);
   if (prediction.includes(INTENTIONS.END_CHAT)) return gotoFlow(endFlow);
   if (prediction.includes(INTENTIONS.CHECK_SCHEDULED_APPOINTMENTS)) return gotoFlow(appointmentsSummaryFlow);
+  if(prediction.includes(INTENTIONS.DENTISTRY_FIRST_TIME_APPOINTMENT)) return gotoFlow(dentistryFirstVisitFlow);
 };
