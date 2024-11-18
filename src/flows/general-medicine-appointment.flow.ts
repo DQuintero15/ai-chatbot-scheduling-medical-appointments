@@ -9,7 +9,6 @@ import { MessageBrokerService } from "src/services/message-broker";
 import { ScheduleService } from "src/services/schedules";
 import { ServicesResponse } from "src/typings/medical-services";
 import { generateTimer } from "src/utils/generateTimer";
-import { clearHistory } from "src/utils/handleHistory";
 import { assistantFlow } from "./assistant.flow";
 
 const generalMedicineAppointment = addKeyword(EVENTS.ACTION)
